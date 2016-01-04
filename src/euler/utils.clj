@@ -1,6 +1,12 @@
 (ns euler.utils)
 
 ;; Good sequences to have
+(def naturals-seq
+  (iterate inc 1))
+
+(def even-seq
+  (iterate (partial + 2) 2))
+
 (def odd-seq
   (iterate (partial + 2) 1))
 
@@ -29,6 +35,13 @@
           (if (zero? r)
             b
             (recur b r)))))))
+
+(defn factors [x]
+  (let [candidate-range (range 2 (inc (/ x 2)))]
+    (flatten (list 1 (filter #(zero? (rem x %)) candidate-range) x))))
+
+(defn number-of-factors [x]
+  (* 2 (count (filter #(zero? (rem x %)) (range 1 (inc (Math/sqrt x)))))))
 
 ;; Useful transformers
 (defn char->int [x] (- (int x) 48))
