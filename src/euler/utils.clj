@@ -45,3 +45,5 @@
 
 ;; Useful transformers
 (defn char->int [x] (- (int x) 48))
+(defn num->num-seq [n]
+  (map char->int (seq (str n))))
